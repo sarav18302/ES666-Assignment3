@@ -19,11 +19,11 @@ class PanaromaStitcher():
         #### you can use functions, class_methods, whatever!! Examples are illustrated below. Remove them and implement yours.
         #### Just make sure to return final stitched image and all Homography matrices from here
         focal_length = {
-            "I1": 600,
+            "I1": 700,
             "I2": 800,
-            "I3": 800,
+            "I3": 400,
             "I4": 600,
-            "I5" :800,
+            "I5" :700,
             "I6" : 1000
         }
         S = stitch.Stitch(all_images,focal_length[path[-2:]])
