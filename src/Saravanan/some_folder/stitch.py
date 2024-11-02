@@ -5,10 +5,11 @@ from src.Saravanan.some_folder import match
 import math
 
 class Stitch():
-    def __init__(self,filenames):
+    def __init__(self,filenames,focal_length):
         # self.path = args
         # filenames = sorted([os.path.join(self.path, f) for f in os.listdir(self.path) if f.lower().endswith('.jpg')])
         print("Filenames :",*filenames)
+        self.focal_length = focal_length
         self.imageSet = [cv2.imread(each) for each in filenames]
         self.images = [cv2.resize(each,(480,320)) for each in self.imageSet ]
         self.pimages = [self.project_onto_cylinder(each) for each in self.images]
@@ -31,7 +32,7 @@ class Stitch():
         global image_width, image_height, center, focal_length
         image_height, image_width = initial_image.shape[:2]
         center = [image_width // 2, image_height // 2]
-        focal_length = 1000
+        focal_length = self.focal_length
     
         # Creating a blank transformed image
         transformed_image = np.zeros(initial_image.shape, dtype=np.uint8)
