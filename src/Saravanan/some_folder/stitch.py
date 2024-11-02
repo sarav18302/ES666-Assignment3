@@ -16,6 +16,7 @@ class Stitch():
         self.left_list, self.right_list = [],[]
         self.centerIdx = int(self.count/2)
         self.matcher_obj = match.matchers()
+        self.homography_matrix_list =[]
 
     def convert_coordinates(self, pixel_x, pixel_y):
         global center, focal_length
@@ -119,12 +120,11 @@ class Stitch():
         
         Homography = self.matcher_obj.match(BaseImg,SecImg)
         print("Homography: ",Homography)
-        
+        self.homography_matrix_list.append(Homography)
         height1, width1 = SecImg.shape[:2]
         height2, width2 = BaseImg.shape[:2]
 
-    # Performing forward Wrapping of corners of the image 
-    # Computing the transformed image corner coordinates 
+    # Performing forward Wrapping of corners of the image  
         up_left_cor = self.homogeneous_coordinate(np.dot(Homography, [[0],[0],[1]]))
         up_right_cor = self.homogeneous_coordinate(np.dot(Homography, [[width1],[0],[1]]))
         low_left_cor = self.homogeneous_coordinate(np.dot(Homography, [[0],[height1],[1]]))
